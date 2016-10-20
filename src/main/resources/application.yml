@@ -1,0 +1,17 @@
+application:
+  name: paragraph.bookmark.extension
+
+environment:
+  name: dev
+
+server:
+  port: 8080
+
+spring:
+ datasource:
+   url: jdbc:mysql://localhost:3306/paragraph_bookmark
+   username: root
+   password: passw0rd
+   driver: com.mysql.cj.jdbc.Driver
+ jpa:
+   database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
