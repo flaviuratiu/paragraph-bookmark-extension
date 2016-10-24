@@ -74,7 +74,7 @@ public class UserPersistenceTest {
         assertThat(user.getId(), notNullValue());
         assertThat(user.getEmail(), nullValue());
         assertThat(user.getCreationDate(), notNullValue());
-        assertThat(user.isReceiveEmailReminders(), is(true));
+        assertThat(user.isReceiveEmailReminders(), is(false));
 
         String email = "test" + System.currentTimeMillis() + "@example.com";
         String password = "password";
@@ -85,7 +85,7 @@ public class UserPersistenceTest {
         assertThat(updatedUser.getEmail(), is(email));
         // TODO
 //        assertThat(updatedUser.getHash(), notNullValue());
-        assertThat(updatedUser.isBookmarksEmailReminder(), is(true));
+        assertThat(updatedUser.isBookmarksEmailReminder(), is(false));
         assertThat(updatedUser.getCreationDate(), notNullValue());
     }
 
@@ -110,6 +110,29 @@ public class UserPersistenceTest {
         // TODO
 //        assertThat(updatedUser.getHash(), notNullValue());
         assertThat(updatedUser.isBookmarksEmailReminder(), is(true));
+        assertThat(updatedUser.getCreationDate(), notNullValue());
+    }
+
+    @Test
+    public void updateEmailReminderPreference() throws GenericException {
+        String email = "test" + System.currentTimeMillis() + "@example.com";
+        String password = "password";
+        UserTO user = userService.createUser(email, password, true);
+        assertThat("Failed to create user.", user, notNullValue());
+        assertThat(user.isReceiveEmailReminders(), is(true));
+
+        userService.updateBookmarkEmailReminderFlag(user.getId(), false);
+        User updatedUser = userService.findById(user.getId());
+        assertThat(updatedUser.isBookmarksEmailReminder(), is(false));
+        assertThat(updatedUser.getId(), is(user.getId()));
+        assertThat(updatedUser.getEmail(), is(email));
+        assertThat(updatedUser.getCreationDate(), notNullValue());
+
+        userService.updateBookmarkEmailReminderFlag(user.getId(), true);
+        updatedUser = userService.findById(user.getId());
+        assertThat(updatedUser.isBookmarksEmailReminder(), is(true));
+        assertThat(updatedUser.getId(), is(user.getId()));
+        assertThat(updatedUser.getEmail(), is(email));
         assertThat(updatedUser.getCreationDate(), notNullValue());
     }
 

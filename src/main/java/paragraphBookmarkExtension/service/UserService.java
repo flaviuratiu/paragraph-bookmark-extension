@@ -52,7 +52,6 @@ public class UserService {
     public UserTO createUser(String email, String password, boolean bookmarkEmailReminder) throws GenericException {
         User user = new User();
         user.setCreationDate(new Date());
-        user.setBookmarksEmailReminder(bookmarkEmailReminder);
         if (email != null) {
             LOGGER.info("Creating user: {}", email);
             validateCredentialsForNewUser(email, password);
@@ -62,6 +61,7 @@ public class UserService {
             user.setIterations(encryptedPassword.getIterations());
             user.setSalt(encryptedPassword.getSalt());
             user.setHash(encryptedPassword.getHash());
+            user.setBookmarksEmailReminder(bookmarkEmailReminder);
         } else {
             LOGGER.info("Creating anonymous user.");
         }
