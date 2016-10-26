@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserPersistenceTest {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;
@@ -44,6 +44,25 @@ public class UserPersistenceTest {
         assertThat(createdUser.getEmail(), is(email));
         assertThat(createdUser.isBookmarksEmailReminder(), is(true));
         assertThat(createdUser.getCreationDate(), notNullValue());
+    }
+
+    @Test
+    public void loginWithNewlyAddedUser() throws GenericException {
+        String email = "test" + System.currentTimeMillis() + "@example.com";
+        String password = "password";
+        UserTO user = userService.createUser(email, password, true);
+
+        assertThat("Failed to create user.", user, notNullValue());
+        assertThat(user.getId(), notNullValue());
+        assertThat(user.getEmail(), is(email));
+        assertThat(user.getCreationDate(), notNullValue());
+        assertThat(user.isReceiveEmailReminders(), is(true));
+
+        UserTO loggedInUser = userService.logIn(email, password);
+        assertThat(loggedInUser.getId(), notNullValue());
+        assertThat(loggedInUser.getEmail(), is(email));
+        assertThat(loggedInUser.isReceiveEmailReminders(), is(true));
+        assertThat(loggedInUser.getCreationDate(), notNullValue());
     }
 
     @Test

@@ -25,7 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class BookmarkPersistenceTest {
+public class BookmarkServiceTest {
 
     @Autowired
     private UserService userService;
