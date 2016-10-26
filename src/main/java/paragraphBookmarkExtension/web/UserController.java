@@ -13,7 +13,7 @@ import paragraphBookmarkExtension.transfer.user.*;
  * @since 13 Oct 2016
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -34,12 +34,12 @@ public class UserController {
         userService.updateBookmarkEmailReminderFlag(request.getUserId(), request.isBookmarkEmailReminder());
     }
 
-    @RequestMapping(value = "/{token}/reset-password", method = RequestMethod.POST)
+    @RequestMapping(value = "/{token}/password/reset", method = RequestMethod.POST)
     public void resetPassword(ResetPasswordRequest request, String token) {
         userService.resetPassword(request.getUserId(), request.getNewPassword(), token);
     }
 
-    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
+    @RequestMapping(value = "/password/update", method = RequestMethod.POST)
     public void updatePassword(UpdatePasswordRequest request) throws GenericException {
         userService.updatePassword(request.getUserId(), request.getOldPassword(), request.getNewPassword());
     }

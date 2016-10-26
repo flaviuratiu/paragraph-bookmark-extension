@@ -17,7 +17,7 @@ import java.util.List;
  * @since 15 Oct 2016
  */
 @RestController
-@RequestMapping("/bookmark")
+@RequestMapping("/bookmarks")
 public class BookmarkController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class BookmarkController {
         return bookmarkService.findByUserIdAndDocumentUrl(request.getUserId(), request.getDocumentUrl());
     }
 
-    @RequestMapping(value = "/get-all", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Page<Bookmark> getAll(GetAllBookmarksRequest request) throws GenericException {
         validateUserId(request);
         return bookmarkService.findByUserId(request.getUserId(), request.getPageable());
@@ -54,7 +54,7 @@ public class BookmarkController {
         }
     }
 
-    @RequestMapping(value = "/{userId}/delete-all", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}/delete", method = RequestMethod.GET)
     public void deleteAll(long userId) {
         bookmarkService.deleteAllBookmarksOfOneUser(userId);
     }
