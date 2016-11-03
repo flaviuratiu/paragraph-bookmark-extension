@@ -4,20 +4,27 @@ var current_user;
 function signUp() {
     email = $("#sign_up_email").val();
     password = $("#sign_up_password").val();
-    emailReminder = $("#email_notifications").val();
+    emailReminder = $("#email_notifications").is(":checked");
     validateSignUpForm(email, password, emailReminder);
 
-    $.post(
-        window.apiHost + "/users/create",
-        {
+    $.ajax({
+        method: 'POST',
+        url: window.apiHost + "/users/create",
+        data: {
             email: email,
             password: password,
             bookmarkEmailReminder: emailReminder
         },
-        function(user) {
-            window.current_user = user;
-        }
-    )
+        dataType: 'json',
+        crossDomain: true
+    })
+    .done(function(user) {
+        window.current_user = user;
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("Sign-up failed.");
+        // TODO: sign up failure message
+    })
 }
 
 function login() {
@@ -40,26 +47,26 @@ function login() {
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("Login failed.");
+        // TODO: login failure message
     })
 }
 
 function validateSignUpForm(email, password, emailReminder) {
-    // TODO
+    // TODO: signup validations
     alert(email + "\n" + password + "\n" + emailReminder);
 }
 
 function validateLoginForm(email, password) {
-    // TODO
+    // TODO: login validations
 }
 
 $(document).ready(function() {
     $("#sign_up").click(
-        function() {
+        function(e) {
             e.preventDefault();
-            signUp(e);
+            signUp();
         }
     );
-
 
     $("#sign_in").click(
         function(e) {

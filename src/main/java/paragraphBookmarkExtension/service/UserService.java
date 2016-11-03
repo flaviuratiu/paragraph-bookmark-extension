@@ -30,6 +30,7 @@ public class UserService {
         try {
             return userRepository.findByEmail(email);
         } catch (NonUniqueResultException exception) {
+            // TODO: catch this exception properly
             if (email != null) {
                 LOGGER.error("Found multiple users with email {}", email);
             }
