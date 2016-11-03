@@ -11,6 +11,7 @@ import paragraphBookmarkExtension.transfer.user.UserTO;
 import paragraphBookmarkExtension.util.password.PasswordEncryptionUtil;
 
 import javax.annotation.Resource;
+import javax.persistence.NonUniqueResultException;
 import java.util.Date;
 
 /**
@@ -26,7 +27,14 @@ public class UserService {
 
     public User findByEmail(String email) {
         LOGGER.info("Searching user by email: {}", email);
-        return userRepository.findByEmail(email);
+        try {
+            return userRepository.findByEmail(email);
+        } catch (NonUniqueResultException exception) {
+            if (email != null) {
+                LOGGER.error("Found multiple users with email {}", email);
+            }
+            return null;
+        }
     }
 
     public User findById(long id) {
@@ -66,6 +74,7 @@ public class UserService {
             LOGGER.info("Creating anonymous user.");
         }
         User createdUser = userRepository.save(user);
+        LOGGER.info("Created new user.");
         return createdUser.asUserTO();
     }
 
@@ -90,6 +99,7 @@ public class UserService {
         }
         EncryptedPassword encryptedPassword = PasswordEncryptionUtil.validateEncryptedPassword(password, user.getSalt(), user.getIterations());
         if (encryptedPassword.getHash().equals(user.getHash())) {
+            LOGGER.info("Login data validated.");
             return user.asUserTO();
         } else {
             throw new GenericException("Invalid username or password", 401);

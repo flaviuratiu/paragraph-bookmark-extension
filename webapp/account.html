@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script language="JavaScript" type="text/javascript" src="js/config.js"></script>
+        <script language="JavaScript" type="text/javascript" src="lib/jquery-3.1.1.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/authentication.js"></script>
+    </head>
+
+    <body>
+        <span>Sign up</span>
+        <form id="sign_up_form">
+            <input id = "sign_up_email" type = "text" placeholder="E-mail"/>
+            <input id = "sign_up_password" type = "password" placeholder="Password"/>
+            <input id = "sign_up_confirm_password" type = "password" placeholder="Confirm password"/>
+            <input id="email_notifications" type="checkbox"/>
+            <button id="sign_up">Sign Up</button>
+        </form>
+
+        <span>Sign in</span>
+        <form id="sign_in_form">
+            <input id = "sign_in_email" type = "text" placeholder="E-mail"/>
+            <input id = "sign_in_password" type = "text" placeholder="Password"/>
+            <button id="sign_in">Sign In</button>
+        </form>
+
+        <span>Current bookmarks</span>
+        <table id="bookmarks">
+            <thead>
+                <th>Select</th>
+                <th>URL</th>
+                <th>Open</th>
+            </thead>
+        </table>
+
+    </body>
+</html>
