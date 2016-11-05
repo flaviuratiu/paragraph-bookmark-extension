@@ -16,10 +16,7 @@
     "media": true,
     "prefs": true,
     "request": {
-      "permissions": [
-        "http://*/*",
-        "https://*/*"
-      ]
+      "permissions": ["*://*/*"]
     },
     "tools": true,
     "reload": true,
@@ -34,7 +31,7 @@
     },
     "activations": [
       {
-        "patterns": ["http://*/*", "https://*/*"],
+        "patterns": ["*://*/*"],
         "scripts": [
           "js/config.js",
           "lib/jquery-2.0.0.js",
