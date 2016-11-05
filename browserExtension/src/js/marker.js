@@ -3,10 +3,9 @@
  */
 
  function createMark(markSpecs) {
-     var documentUrl = "loc";
+     var documentUrl = window.location.toString();
      var emailReminderEnabled = true;
      var userId = 1;
-     // TODO: extract current url
      // TODO: get user ID from cookie
 
      $.ajax({
