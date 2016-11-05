@@ -1,0 +1,50 @@
+{
+  "config_version": "2",
+  "name": "Permanent Marker",
+  "author": "Flaviu Ratiu",
+  "version": "0.1",
+  "platform_version": "v1.4",
+  "description": "Highlight text within web pages to keep track of what you found interesting or what you haven't finished reading. This is a Permanent Marker, so your work will be available anytime, on any device.",
+  "modules": {
+    "logging": {
+      "level": "DEBUG"
+    },
+    "message": true,
+    "contact": true,
+    "file": true,
+    "is": true,
+    "media": true,
+    "prefs": true,
+    "request": {
+      "permissions": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    },
+    "tools": true,
+    "reload": true,
+
+    "button": {
+      "default_popup": "index.html",
+      "default_title": "Permanent Marker",
+      "default_icon": "media/cyanhighlighter-300px.png",
+      "default_icons": {
+        "firefox": "media/cyanhighlighter-300px.png"
+      }
+    },
+    "activations": [
+      {
+        "patterns": ["http://*/*", "https://*/*"],
+        "scripts": [
+          "js/config.js",
+          "lib/jquery-2.0.0.js",
+          "js/bookmark.js",
+          "js/content.js"
+        ],
+        "styles": [],
+        "run_at": "start",
+        "all_frames": true
+      }
+    ]
+  }
+}
