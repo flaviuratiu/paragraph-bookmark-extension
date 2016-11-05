@@ -8,16 +8,14 @@ var current_user;
 function signUp() {
     email = $("#sign_up_email").val();
     password = $("#sign_up_password").val();
-    emailReminder = $("#email_notifications").is(":checked");
-    validateSignUpForm(email, password, emailReminder);
+    validateSignUpForm(email, password);
 
     $.ajax({
         method: 'POST',
         url: window.apiHost + "/users/create",
         data: {
             email: email,
-            password: password,
-            bookmarkEmailReminder: emailReminder
+            password: password
         },
         dataType: 'json',
         crossDomain: true
@@ -55,9 +53,8 @@ function login() {
     })
 }
 
-function validateSignUpForm(email, password, emailReminder) {
+function validateSignUpForm(email, password) {
     // TODO: signup validations
-    alert(email + "\n" + password + "\n" + emailReminder);
 }
 
 function validateLoginForm(email, password) {

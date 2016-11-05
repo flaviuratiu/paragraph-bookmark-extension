@@ -1,5 +1,5 @@
 application:
-  name: paragraph.bookmark.extension
+  name: permanent.marker.service
 
 environment:
   name: dev
@@ -9,7 +9,7 @@ server:
 
 spring:
  datasource:
-   url: jdbc:mysql://localhost:3306/paragraph_bookmark
+   url: jdbc:mysql://localhost:3306/permanent_marker
    username: root
    password: passw0rd
    driver: com.mysql.cj.jdbc.Driver

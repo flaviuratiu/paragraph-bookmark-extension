@@ -35,7 +35,8 @@
         "scripts": [
           "js/config.js",
           "lib/jquery-2.0.0.js",
-          "js/bookmark.js",
+          "lib/jquery.mark.min.js",
+          "js/marker.js",
           "js/content.js"
         ],
         "styles": [],

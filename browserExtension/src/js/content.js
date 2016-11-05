@@ -7,7 +7,7 @@
        "highlight_triggered",
        function() {
         console.log("'highlight_triggered' message received.")
-        createBookmark();
+        createMark();
        },
        function(content) {
         console.log(content)

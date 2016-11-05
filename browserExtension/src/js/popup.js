@@ -12,7 +12,7 @@
   }
 
  $(document).ready(function() {
-     $("#add-bookmark").click(
+     $("#add-mark").click(
          function(e) {
              e.preventDefault();
              broadcastHighlightMessage();
