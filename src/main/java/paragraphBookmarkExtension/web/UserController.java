@@ -1,7 +1,11 @@
 package paragraphBookmarkExtension.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import paragraphBookmarkExtension.service.UserService;
 import paragraphBookmarkExtension.transfer.exception.GenericException;
 import paragraphBookmarkExtension.transfer.user.*;
@@ -18,13 +22,13 @@ public class UserController {
     private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public UserTO createUser(CreateUserRequest request) throws GenericException {
         return userService.createUser(request.getEmail(), request.getPassword(), request.isBookmarkEmailReminder());
     }
 
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public UserTO logIn(UserAuthenticationRequest request) throws GenericException {
         return userService.logIn(request.getEmail(), request.getPassword());
     }

@@ -2,8 +2,10 @@ package paragraphBookmarkExtension.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import paragraphBookmarkExtension.dao.domain.Bookmark;
 import paragraphBookmarkExtension.service.BookmarkService;
@@ -23,7 +25,8 @@ public class BookmarkController {
     @Autowired
     private BookmarkService bookmarkService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Bookmark add(AddBookmarkRequest request) throws GenericException {
         validateAddBookmarkRequest(request);
         return bookmarkService.addBookmark(request.getUserId(), request.getDocumentUrl(), request.getTextFirstPart(), request.getTextLastPart());

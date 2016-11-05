@@ -1,3 +1,7 @@
+/**
+ * Created by Flaviu Ratiu on 03/11/2016.
+ */
+
 var auth_token;
 var current_user;
 
