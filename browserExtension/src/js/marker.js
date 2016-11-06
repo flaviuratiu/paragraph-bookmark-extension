@@ -3,33 +3,35 @@
  */
 
  function createMark(markSpecs) {
-     var documentUrl = window.location.toString();
-     var emailReminderEnabled = true;
-     var userId = 1;
-     // TODO: get user ID from cookie
+    if (markSpecs.selected && markSpecs.selected != "") {
+        var documentUrl = window.location.toString();
+        var emailReminderEnabled = true;
+        var userId = 1;
+        // TODO: get user ID from cookie
 
-     $.ajax({
-         method: 'POST',
-         url: window.apiHost + "/marks/create",
-         data: {
-             userId: userId,
-             documentUrl: documentUrl,
-             text: markSpecs.selected,
-             precedingText: markSpecs.before,
-             trailingText: markSpecs.after,
-             emailReminderEnabled: emailReminderEnabled
-         },
-         dataType: "json",
-         crossDomain: true
-     })
-     .done(function() {
-         console.log("Highlighting saved.");
-         highlightText(markSpecs.before, markSpecs.selected, markSpecs.after);
-     })
-     .fail(function() {
-         console.log("Failed to save highlighting.");
-         // TODO: Bookmark creation failure message
-     })
+        $.ajax({
+            method: 'POST',
+            url: window.apiHost + "/marks/create",
+            data: {
+                userId: userId,
+                documentUrl: documentUrl,
+                text: markSpecs.selected,
+                precedingText: markSpecs.before,
+                trailingText: markSpecs.after,
+                emailReminderEnabled: emailReminderEnabled
+            },
+            dataType: "json",
+            crossDomain: true
+        })
+        .done(function() {
+            console.log("Highlighting saved.");
+            highlightText(markSpecs.before, markSpecs.selected, markSpecs.after);
+        })
+        .fail(function() {
+            console.log("Failed to save highlighting.");
+            // TODO: Bookmark creation failure message
+        })
+     }
  }
 
  function highlightText(precedingText, text, trailingText) {
@@ -83,4 +85,29 @@
         selected: sel.toString(),
         after: after
     };
+ }
+
+ function highlightStoredMarks() {
+    var documentUrl = window.location.toString();
+    var userId = 1;
+
+    $.ajax({
+        method: 'POST',
+        url: window.apiHost + "/marks/get",
+        data: {
+            userId: userId,
+            documentUrl: documentUrl
+        },
+        dataType: "json",
+        crossDomain: true
+    })
+    .done(function(data) {
+        console.log("Successfully searched for stored marks.")
+        $.each(data.marks, function(index, mark) {
+            highlightText(mark.precedingText, mark.text, mark.trailingText);
+        });
+    })
+    .fail(function() {
+        console.log("Search for stored marks failed.");
+    });
  }

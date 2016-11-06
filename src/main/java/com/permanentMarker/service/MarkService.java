@@ -1,17 +1,18 @@
 package com.permanentMarker.service;
 
+import com.permanentMarker.dao.MarkRepository;
 import com.permanentMarker.dao.domain.Mark;
+import com.permanentMarker.transfer.exception.GenericException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.permanentMarker.dao.MarkRepository;
-import com.permanentMarker.transfer.exception.GenericException;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Flaviu Ratiu
@@ -35,8 +36,10 @@ public class MarkService {
     }
 
     public List<Mark> findByUserIdAndDocumentUrl(long userId, String documentUrl) {
-        LOGGER.info("Searching mark by user id " + userId + " and document URL: " + documentUrl);
-        return markRepository.findByUserIdAndDocumentUrl(userId, documentUrl);
+        LOGGER.info("Searching marks by user id " + userId + " and document URL: " + documentUrl);
+        List<Mark> marks = markRepository.findByUserIdAndDocumentUrl(userId, documentUrl);
+        LOGGER.debug("Retrieved marks:\n" + marks.stream().map(Mark::toString).collect(Collectors.joining("\n")));
+        return marks;
     }
 
     public int countByUserId(long userId) {

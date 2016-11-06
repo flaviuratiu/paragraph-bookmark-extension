@@ -97,4 +97,17 @@ public class Mark implements Serializable {
     public void setEmailReminderEnabled(boolean emailReminderEnabled) {
         this.emailReminderEnabled = emailReminderEnabled;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ":\n" +
+                "id: " + id + ",\n" +
+                "userId: " + userId + ",\n" +
+                "documentUrl: " + documentUrl + ",\n" +
+                "text: " + text + ",\n" +
+                "precedingText: " + precedingText + ",\n" +
+                "trailingText: " + trailingText + ",\n" +
+                "emailReminderEnabled: " + emailReminderEnabled + ",\n" +
+                "creationDate: " + creationDate + "\n";
+    }
 }

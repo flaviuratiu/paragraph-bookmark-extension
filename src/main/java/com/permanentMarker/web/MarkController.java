@@ -32,16 +32,20 @@ public class MarkController {
         return markService.addMark(request.getUserId(), request.getDocumentUrl(), request.getText(), request.getPrecedingText(), request.getTrailingText(), request.isEmailReminderEnabled());
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public List<Mark> get(GetMarkRequest request) throws GenericException {
+    @ResponseBody
+    @RequestMapping(value = "/get", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public MarksListResponse get(GetMarkRequest request) throws GenericException {
         validateGetMarkRequest(request);
-        return markService.findByUserIdAndDocumentUrl(request.getUserId(), request.getDocumentUrl());
+        List<Mark> marks = markService.findByUserIdAndDocumentUrl(request.getUserId(), request.getDocumentUrl());
+        return new MarksListResponse(marks);
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Page<Mark> getAll(GetAllMarksRequest request) throws GenericException {
+    @ResponseBody
+    @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public MarksPagedListResponse getAll(GetAllMarksRequest request) throws GenericException {
         validateUserId(request);
-        return markService.findByUserId(request.getUserId(), request.getPageable());
+        Page<Mark> marks = markService.findByUserId(request.getUserId(), request.getPageable());
+        return new MarksPagedListResponse(marks);
     }
 
     @RequestMapping(value = "/{markId}/delete", method = RequestMethod.GET)
