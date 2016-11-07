@@ -2,12 +2,10 @@
  * Created by Flaviu Ratiu on 10/26/2016.
  */
 
- function createMark(markSpecs) {
+ function createMark(markSpecs, userId) {
     if (markSpecs.selected && markSpecs.selected != "") {
         var documentUrl = window.location.toString();
         var emailReminderEnabled = true;
-        var userId = 1;
-        // TODO: get user ID from cookie
 
         $.ajax({
             method: 'POST',
@@ -87,9 +85,8 @@
     };
  }
 
- function highlightStoredMarks() {
+ function highlightStoredMarks(userId) {
     var documentUrl = window.location.toString();
-    var userId = 1;
 
     $.ajax({
         method: 'POST',

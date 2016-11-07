@@ -22,6 +22,9 @@ function signUp() {
     })
     .done(function(user) {
         window.current_user = user;
+        Cookies.set('permanent-marker', {
+                user: user.id
+            });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("Sign-up failed.");
@@ -46,6 +49,9 @@ function login() {
     })
     .done(function(user) {
         window.current_user = user;
+        Cookies.set('permanent-marker', {
+                user: user.id
+            });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("Login failed.");

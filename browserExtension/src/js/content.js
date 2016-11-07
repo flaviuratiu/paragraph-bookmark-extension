@@ -3,9 +3,20 @@
  */
 
  $(document).ready(function() {
-    $(function() {
-        highlightStoredMarks();
-    });
+    var userId;
+    forge.message.listen(
+       "currentUser",
+       function(content) {
+            console.log("'currentUser' message received.");
+            userId = content;
+            if (userId) {
+                highlightStoredMarks(userId);
+            }
+       },
+       function(content) {
+            console.log(content);
+       }
+    );
 
     var highlightTriggered = false;
     forge.message.listen(
@@ -22,7 +33,7 @@
     $("body :not(:button, img, script)").mouseup(function(e) {
         if (highlightTriggered) {
             var markSpecs = getMarkSpecs();
-            createMark(markSpecs);
+            createMark(markSpecs, userId);
             highlightTriggered = false;
         }
     });

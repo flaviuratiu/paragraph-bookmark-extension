@@ -9,14 +9,22 @@
     "logging": {
       "level": "DEBUG"
     },
+    "background": {
+      "files": ["js/background.js"]
+    },
     "message": true,
     "contact": true,
+    "tabs": true,
     "file": true,
     "is": true,
     "media": true,
     "prefs": true,
     "request": {
-      "permissions": ["*://*/*"]
+      "permissions": [
+        "cookies",
+        "http://*/*",
+        "https://*/*"
+      ]
     },
     "tools": true,
     "reload": true,
@@ -31,11 +39,28 @@
     },
     "activations": [
       {
-        "patterns": ["*://*/*"],
+        "patterns": [
+          "http://localhost:63342/paragraphBookmarkService/webapp/account.html"
+        ],
+        "scripts": [
+          "lib/jquery-2.0.0.js",
+          "lib/js.cookie.js",
+          "js/sharedStorage.js"
+        ],
+        "styles": [],
+        "run_at": "start",
+        "all_frames": true
+      },
+      {
+        "patterns": [
+          "http://*/*",
+          "https://*/*"
+        ],
         "scripts": [
           "js/config.js",
           "lib/jquery-2.0.0.js",
           "lib/jquery.mark.min.js",
+          "lib/js.cookie.js",
           "js/marker.js",
           "js/content.js"
         ],
