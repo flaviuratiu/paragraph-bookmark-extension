@@ -98,6 +98,7 @@
         })
         .done(function() {
             console.debug("Batch delete successful.");
+            $("#marks").find("tbody").empty();
             var pageNumber = 1;
             var pageSize = 20;
             getUsersHighlightedItems(userId, pageNumber, pageSize);
