@@ -5,10 +5,7 @@ import com.permanentMarker.transfer.mark.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.permanentMarker.service.MarkService;
 import com.permanentMarker.transfer.exception.GenericException;
 
@@ -53,8 +50,8 @@ public class MarkController {
         markService.deleteMark(markId);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void batchDelete(BatchDeleteMarksRequest request) throws GenericException {
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void batchDelete(@RequestBody BatchDeleteMarksRequest request) throws GenericException {
         if (!request.getMarkIds().isEmpty()) {
             validateUserId(request);
             markService.batchDeleteMarks(request.getMarkIds());

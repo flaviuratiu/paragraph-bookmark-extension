@@ -40,6 +40,7 @@
                         .append($("<input>")
                             .attr("type", "checkbox")
                             .attr("class", "select-mark")
+                            .data("markId", items[index].id)
                         )
                     )
                 )
@@ -64,8 +65,46 @@
         var pageNumber = 1;
         var pageSize = 20;
         getUsersHighlightedItems(userId, pageNumber, pageSize);
+
+        $("#delete-marks").click(function() {
+            console.debug("Delete event captured.");
+            deleteSelectedItems(cookie.user);
+        });
     } else {
         console.debug("Invalid user in cookie.");
         displayEmptyTableBody();
     }
  });
+
+ function deleteSelectedItems(userId) {
+    console.debug("userId in delete call: " + userId);
+    var selectedItems = [];
+    $(".select-mark:checkbox:checked").each(function(index) {
+        var markId = $(this).data("markId");
+        selectedItems.push(markId);
+    });
+
+    if (selectedItems.length > 0) {
+        console.debug("Selected items: " + selectedItems);
+        $.ajax({
+            method: "POST",
+            url: window.apiHost + "/marks/delete",
+            crossDomain: true,
+            contentType: "application/json",
+            data: JSON.stringify({
+                userId: userId,
+                markIds: selectedItems
+            })
+        })
+        .done(function() {
+            console.debug("Batch delete successful.");
+            var pageNumber = 1;
+            var pageSize = 20;
+            getUsersHighlightedItems(userId, pageNumber, pageSize);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.debug("Batch delete failed.\n" + jqXHR + " " + textStatus + "\n" + errorThrown);
+        });
+    }
+ }
+
