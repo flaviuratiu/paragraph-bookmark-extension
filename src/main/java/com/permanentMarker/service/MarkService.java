@@ -26,7 +26,7 @@ public class MarkService {
     private MarkRepository markRepository;
 
     public Page<Mark> findByUserId(long userId, Pageable pageable) {
-        LOGGER.info("Searching mark by user id: {}", userId);
+        LOGGER.info("Searching marks by user id: {}", userId);
         return markRepository.findByUserId(userId, pageable);
     }
 

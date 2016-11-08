@@ -22,13 +22,12 @@ function signUp() {
     })
     .done(function(user) {
         window.current_user = user;
-        Cookies.set('permanent-marker', {
+        Cookies.set(window.appCookieName, {
                 user: user.id
             });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("Sign-up failed.");
-        // TODO: sign up failure message
+        console.debug("Sign up failed.\n" + jqXHR + " " + textStatus + "\n" + errorThrown);
     })
 }
 
@@ -50,13 +49,12 @@ function login() {
     .done(function(user) {
         window.current_user = user;
         Cookies.set(
-            'permanent-marker', {
+             window.appCookieName, {
              user: user.id
         });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("Login failed.");
-        // TODO: login failure message
+        console.debug("Login failed.\n" + jqXHR + " " + textStatus + "\n" + errorThrown);
     })
 }
 

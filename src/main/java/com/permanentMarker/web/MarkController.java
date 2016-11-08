@@ -42,10 +42,10 @@ public class MarkController {
 
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public MarksPagedListResponse getAll(GetAllMarksRequest request) throws GenericException {
+    public MarksListResponse getAll(GetAllMarksRequest request) throws GenericException {
         validateUserId(request);
         Page<Mark> marks = markService.findByUserId(request.getUserId(), request.getPageable());
-        return new MarksPagedListResponse(marks);
+        return new MarksListResponse(marks.getContent());
     }
 
     @RequestMapping(value = "/{markId}/delete", method = RequestMethod.GET)

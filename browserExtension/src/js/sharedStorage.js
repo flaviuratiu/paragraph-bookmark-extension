@@ -3,7 +3,7 @@
  */
 
  function getUser() {
-    var cookie = Cookies.getJSON('permanent-marker');
+    var cookie = Cookies.getJSON("permanent-marker-app");
     if (cookie && cookie.user) {
         return cookie.user;
     } else {
