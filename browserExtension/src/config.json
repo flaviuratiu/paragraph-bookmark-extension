@@ -10,7 +10,10 @@
       "level": "DEBUG"
     },
     "background": {
-      "files": ["js/background.js"]
+      "files": [
+        "lib/js.cookie.js",
+        "js/background.js"
+      ]
     },
     "message": true,
     "contact": true,

@@ -6,8 +6,8 @@
     forge.message.toFocussed(
         "highlight_triggered",
         "Capture next selection.",
-        function(){console.log("Highlight done successfully.")},
-        function(){console.log("Failed to trigger highlighting.")
+        function(){console.debug("Highlight done successfully.")},
+        function(){console.debug("Failed to trigger highlighting.")
     })
   }
 

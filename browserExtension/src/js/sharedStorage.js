@@ -11,17 +11,17 @@
     }
  }
 
- $(document).ready(function(){
+ (function(){
     var user = getUser();
-    console.log("user from storage: \n" + user);
+    console.debug("user from storage: " + user);
     forge.message.broadcastBackground(
-        "user",
+        "userAuthenticated",
         user,
         function() {
-            console.log("Broadcast user message successful.")
+            console.debug("Broadcast user message successful.")
         },
         function() {
-            console.log("Failed to broadcast user message.")
+            console.debug("Failed to broadcast user message.")
         }
     )
- });
+ })();

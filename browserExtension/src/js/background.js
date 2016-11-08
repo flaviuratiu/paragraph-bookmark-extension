@@ -4,25 +4,28 @@
 
  (function() {
     forge.message.listen(
-       "user",
+       "userAuthenticated",
        function(user) {
-            broadcastUser(user);
+            Cookies.set(
+                "permanent-marker-extension", {
+                user: user
+            });
        },
        function(content) {
-            console.log(content);
+            console.debug(content);
        }
     );
  })();
 
- function broadcastUser(user) {
-    forge.message.broadcast(
-        "currentUser",
-        user,
-        function() {
-            console.log("Background broadcast successful.")
+ (function() {
+    forge.message.listen(
+        "getUser",
+        function(content, reply) {
+            var cookie = Cookies.getJSON("permanent-marker-extension");
+            reply(cookie.user);
         },
-        function() {
-            console.log("Background broadcast failed.")
+        function(content) {
+            console.debug(content);
         }
     );
- }
+ })();

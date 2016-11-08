@@ -49,9 +49,10 @@ function login() {
     })
     .done(function(user) {
         window.current_user = user;
-        Cookies.set('permanent-marker', {
-                user: user.id
-            });
+        Cookies.set(
+            'permanent-marker', {
+             user: user.id
+        });
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("Login failed.");

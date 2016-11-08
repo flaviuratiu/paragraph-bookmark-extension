@@ -22,11 +22,11 @@
             crossDomain: true
         })
         .done(function() {
-            console.log("Highlighting saved.");
+            console.debug("Highlighting saved.");
             highlightText(markSpecs.before, markSpecs.selected, markSpecs.after);
         })
         .fail(function() {
-            console.log("Failed to save highlighting.");
+            console.debug("Failed to save highlighting.");
             // TODO: Bookmark creation failure message
         })
      }
@@ -99,12 +99,12 @@
         crossDomain: true
     })
     .done(function(data) {
-        console.log("Successfully searched for stored marks.")
+        console.debug("Successfully searched for stored marks.")
         $.each(data.marks, function(index, mark) {
             highlightText(mark.precedingText, mark.text, mark.trailingText);
         });
     })
     .fail(function() {
-        console.log("Search for stored marks failed.");
+        console.debug("Search for stored marks failed.");
     });
  }

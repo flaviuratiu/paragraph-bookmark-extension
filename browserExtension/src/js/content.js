@@ -3,30 +3,32 @@
  */
 
  $(document).ready(function() {
+
     var userId;
-    forge.message.listen(
-       "currentUser",
-       function(content) {
-            console.log("'currentUser' message received.");
-            userId = content;
-            if (userId) {
+    forge.message.broadcastBackground(
+        "getUser",
+        {},
+        function(user) {
+            console.debug("'getUser' response: " + user);
+            if (user) {
+                userId = user;
                 highlightStoredMarks(userId);
             }
-       },
-       function(content) {
-            console.log(content);
-       }
+        },
+        function(content) {
+            console.debug("Failed to publish 'getUser' message. " + content);
+        }
     );
 
     var highlightTriggered = false;
     forge.message.listen(
        "highlight_triggered",
        function() {
-            console.log("'highlight_triggered' message received.");
+            console.debug("'highlight_triggered' message received.");
             highlightTriggered = true;
        },
        function(content) {
-            console.log(content);
+            console.debug(content);
        }
     );
 
