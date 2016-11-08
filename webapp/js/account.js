@@ -70,6 +70,10 @@
             console.debug("Delete event captured.");
             deleteSelectedItems(cookie.user);
         });
+
+        $("#logout").click(function () {
+            Cookies.remove(window.appCookieName);
+        })
     } else {
         console.debug("Invalid user in cookie.");
         displayEmptyTableBody();

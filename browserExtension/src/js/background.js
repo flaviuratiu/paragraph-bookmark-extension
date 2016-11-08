@@ -4,6 +4,18 @@
 
  (function() {
     forge.message.listen(
+       "userNotAuthenticated",
+       function(user) {
+            Cookies.remove("permanent-marker-extension");
+       },
+       function(content) {
+            console.debug(content);
+       }
+    );
+ })();
+
+ (function() {
+    forge.message.listen(
        "userAuthenticated",
        function(user) {
             Cookies.set(

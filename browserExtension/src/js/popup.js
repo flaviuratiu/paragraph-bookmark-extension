@@ -15,7 +15,12 @@
      $("#add-mark").click(
          function(e) {
              e.preventDefault();
-             broadcastHighlightMessage();
+             var cookie = Cookies.get("permanent-marker-extension");
+             if (cookie && cookie.user) {
+                broadcastHighlightMessage();
+             } else {
+                alert("Please log in to the Permanent Marker app.");
+             }
          }
      );
  });

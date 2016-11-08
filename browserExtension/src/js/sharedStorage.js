@@ -14,14 +14,27 @@
  (function(){
     var user = getUser();
     console.debug("user from storage: " + user);
-    forge.message.broadcastBackground(
-        "userAuthenticated",
-        user,
-        function() {
-            console.debug("Broadcast user message successful.")
-        },
-        function() {
-            console.debug("Failed to broadcast user message.")
-        }
-    )
+    if (user != null) {
+        forge.message.broadcastBackground(
+            "userAuthenticated",
+            user,
+            function() {
+                console.debug("Broadcast user message successful.")
+            },
+            function() {
+                console.debug("Failed to broadcast user message.")
+            }
+        )
+    } else {
+        forge.message.broadcastBackground(
+            "userNotAuthenticated",
+            user,
+            function() {
+                console.debug("Broadcast user message successful.")
+            },
+            function() {
+                console.debug("Failed to broadcast user message.")
+            }
+        )
+    }
  })();
