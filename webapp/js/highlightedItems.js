@@ -53,7 +53,7 @@
     $("#marks").find("tbody")
         .append($("<tr>")
             .attr("class", "empty-table-body")
-            .text("No highlighted items available.")
+            .text("You haven't highlighted any items yet.")
         );
  }
 
