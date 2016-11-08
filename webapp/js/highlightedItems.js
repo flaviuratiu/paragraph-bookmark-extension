@@ -63,7 +63,7 @@
         console.debug("Valid user in cookie.");
         var userId = cookie.user;
         var pageNumber = 1;
-        var pageSize = 20;
+        var pageSize = 100;
         getUsersHighlightedItems(userId, pageNumber, pageSize);
 
         $("#delete-marks").click(function() {
@@ -100,7 +100,7 @@
             console.debug("Batch delete successful.");
             $("#marks").find("tbody").empty();
             var pageNumber = 1;
-            var pageSize = 20;
+            var pageSize = 100;
             getUsersHighlightedItems(userId, pageNumber, pageSize);
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
