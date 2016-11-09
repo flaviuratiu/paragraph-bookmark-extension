@@ -77,7 +77,7 @@ public class UserServiceTest {
             assertThat("Unexpectedly created duplicate user.", duplicateUser, nullValue());
         } catch (GenericException e) {
             assertThat(e.getMessage(), is("Email " + email + " is already in use."));
-            assertThat(e.getStatusCode(), is(422));
+            assertThat(e.getStatus(), is(422));
         }
     }
 

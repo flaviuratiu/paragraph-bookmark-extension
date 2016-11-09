@@ -7,19 +7,19 @@ package com.permanentMarker.transfer.exception;
 public class GenericException extends Exception{
 
     private String message;
-    private int statusCode;
+    private int status;
 
-    public GenericException(String message, int statusCode) {
+    public GenericException(String message, int status) {
         this.message = message;
-        this.statusCode = statusCode;
+        this.status = status;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public int getStatus() {
+        return status;
     }
 
 }

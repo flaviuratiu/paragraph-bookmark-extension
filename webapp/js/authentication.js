@@ -6,6 +6,7 @@ function signUp() {
     console.debug("Sign up flow started");
     email = $("#email").val();
     password = $("#password").val();
+    var errorMessage = $(".error-message");
 
     if (validateSignUpForm(email, password)) {
         $.ajax({
@@ -24,8 +25,14 @@ function signUp() {
                     user: user.id
                 });
         })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.debug("Sign up failed.\n" + jqXHR + " " + textStatus + "\n" + errorThrown);
+        .fail(function(xhr, textStatus, errorThrown) {
+            var text = "An error has occurred while registering your new account. Please try again later.";
+            var error = JSON.parse(xhr.responseText);
+            if (error.message == "Email " + email + " is already in use.") {
+                text = "The email " + email + " is already in use."
+            }
+            errorMessage.text(text);
+            errorMessage.show();
         })
     }
 }
@@ -33,6 +40,7 @@ function signUp() {
 function login() {
     email = $("#email").val();
     password = $("#password").val();
+    var errorMessage = $(".error-message");
 
     if (validateLoginForm(email, password)) {
         $.ajax({
@@ -52,8 +60,14 @@ function login() {
                  user: user.id
             });
         })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-            console.debug("Login failed.\n" + jqXHR + " " + textStatus + "\n" + errorThrown);
+        .fail(function(xhr, textStatus, errorThrown) {
+            var text = "An error has occurred while signing you in to your account. Please try again later.";
+            var error = JSON.parse(xhr.responseText);
+            if (error.message == "Invalid username or password") {
+                text = "Invalid username or password."
+            }
+            errorMessage.text(text);
+            errorMessage.show();
         })
     }
 }
