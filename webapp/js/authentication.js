@@ -62,10 +62,6 @@ function validateSignUpForm(email, password) {
     var errorMessage = $(".error-message");
     var confirmPasswordField = $("#confirm-password");
 
-    confirmPasswordField.click(function() {
-        errorMessage.hide();
-    })
-
     if (!validateLoginForm(email, password)) {
         return false;
     }
@@ -81,10 +77,7 @@ function validateSignUpForm(email, password) {
 function validateLoginForm(email, password) {
     var errorMessage = $(".error-message");
 
-    $("#email").click(function() {
-        errorMessage.hide();
-    })
-    $("#password").click(function() {
+    $("div > .required").click(function() {
         errorMessage.hide();
     })
 
