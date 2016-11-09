@@ -12,14 +12,20 @@
   }
 
  $(document).ready(function() {
+     var cookie = Cookies.get("permanent-marker-extension");
+     if (cookie && cookie.user) {
+        $("#log-in").hide();
+        $("#manage-account").show();
+     }
+
      $("#add-mark").click(
          function(e) {
              e.preventDefault();
-             var cookie = Cookies.get("permanent-marker-extension");
              if (cookie && cookie.user) {
                 broadcastHighlightMessage();
              } else {
-                alert("Please log in to the Permanent Marker app.");
+                $("#error-message").text("Please log in to the Permanent Marker app.");
+                $("#error-message").show();
              }
          }
      );
