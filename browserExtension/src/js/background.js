@@ -34,7 +34,9 @@
         "getUser",
         function(content, reply) {
             var cookie = Cookies.getJSON("permanent-marker-extension");
-            reply(cookie.user);
+            if (cookie && cookie.user) {
+                reply(cookie.user);
+            }
         },
         function(content) {
             console.debug(content);

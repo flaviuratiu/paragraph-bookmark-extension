@@ -7,7 +7,7 @@
     var userId;
     forge.message.broadcastBackground(
         "getUser",
-        {},
+        "getUser",
         function(user) {
             console.debug("'getUser' response: " + user);
             if (user) {
