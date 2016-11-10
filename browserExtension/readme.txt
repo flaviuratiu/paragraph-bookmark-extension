@@ -1,0 +1,1 @@
+This extension can be built and packaged with forge-extension: https://github.com/trigger-corp/browser-extensions
