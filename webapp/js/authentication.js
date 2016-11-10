@@ -6,7 +6,6 @@ function signUp() {
     console.debug("Sign up flow started");
     email = $("#email").val();
     password = $("#password").val();
-    var errorMessage = $(".error-message");
 
     if (validateSignUpForm(email, password)) {
         $.ajax({
@@ -31,8 +30,7 @@ function signUp() {
             if (error.message == "Email " + email + " is already in use.") {
                 text = "The email " + email + " is already in use."
             }
-            errorMessage.text(text);
-            errorMessage.show();
+            showMessage("error", text);
         })
     }
 }
@@ -40,7 +38,6 @@ function signUp() {
 function login() {
     email = $("#email").val();
     password = $("#password").val();
-    var errorMessage = $(".error-message");
 
     if (validateLoginForm(email, password)) {
         $.ajax({
@@ -66,14 +63,24 @@ function login() {
             if (error.message == "Invalid username or password") {
                 text = "Invalid username or password."
             }
-            errorMessage.text(text);
-            errorMessage.show();
+            showMessage("error", text);
         })
     }
 }
 
+function showMessage(className, text) {
+    var errorMessage = $(".message");
+    $(errorMessage).attr("class", "message");
+    $(errorMessage).addClass(className);
+    $(errorMessage).empty();
+    $(errorMessage)
+        .append($("<p>")
+            .text(text)
+        );
+    errorMessage.show();
+}
+
 function validateSignUpForm(email, password) {
-    var errorMessage = $(".error-message");
     var confirmPasswordField = $("#confirm-password");
 
     if (!validateLoginForm(email, password)) {
@@ -81,30 +88,27 @@ function validateSignUpForm(email, password) {
     }
 
     if (confirmPasswordField.val() != password) {
-        errorMessage.text("Passwords do not match.");
-        errorMessage.show();
+        showMessage("error", "Passwords do not match.");
         return false;
     }
     return true;
 }
 
 function validateLoginForm(email, password) {
-    var errorMessage = $(".error-message");
+    var errorMessage = $(".message");
 
-    $("div > .required").click(function() {
+    $(".auth-field").click(function() {
         errorMessage.hide();
     })
 
     var validEmail = email.match("^(\\w+)([\\-+.\\'][\\w]+)*@(\\w[\\-\\w]*\\.){1,5}([A-Za-z]){2,6}$");
     if (!validEmail) {
-        errorMessage.text("Please fill in a valid e-mail address.");
-        errorMessage.show();
+        showMessage("error", "Please fill in a valid e-mail address.");
         return false;
     }
 
     if (!password || password == "") {
-        errorMessage.text("Please fill in your password.");
-        errorMessage.show();
+        showMessage("error", "Please fill in your password.");
         return false;
     }
     return true;

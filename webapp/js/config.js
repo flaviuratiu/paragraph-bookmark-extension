@@ -4,4 +4,4 @@
 
 var apiHost = "http://localhost:8080";
 var appCookieName = "permanent-marker-app";
-var uiBasePath = "/paragraphBookmarkService/webapp";
+var uiBasePath = "/permanentMarker/webapp";

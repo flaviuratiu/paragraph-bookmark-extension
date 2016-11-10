@@ -3,4 +3,4 @@
  */
 
 var apiHost = "http://localhost:8080";
-var uiHost = "http://localhost:63342/paragraphBookmarkService/webapp";
+var uiHost = "http://localhost:63342/permanentMarker/webapp";

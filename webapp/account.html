@@ -1,29 +1,51 @@
+<!DOCTYPE html>
 <html>
     <head>
         <script language="JavaScript" type="text/javascript" src="js/config.js"></script>
         <script language="JavaScript" type="text/javascript" src="lib/jquery-3.1.1.js"></script>
         <script language="JavaScript" type="text/javascript" src="lib/js.cookie.js"></script>
         <script language="JavaScript" type="text/javascript" src="js/account.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/account.css">
+        <title>Permanent Marker</title>
     </head>
 
     <body>
+        <div class="main">
+            <div class="header">
+                <h1><span class="highlighted">Permanent M</span><span class="not-highlighted">arker</span></h1>
+                <p>Highlight and never lose track of <span class="same-color">interesting readings</span></p>
+            </div>
 
-        <h1>Highlighted items</h1>
+            <div class="content">
 
-        <table id="marks">
-            <thead>
-                <th>Number</th>
-                <th>URL</th>
-                <th>Highlighted Text</th>
-                <th>Select</th>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+                <h2>Highlighted items</h2>
 
-        <button id="delete-marks">Delete Selected</button>
+                <table id="marks" style="display:none">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>URL</th>
+                            <th>Highlighted Text</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
 
-        <a href="/paragraphBookmarkService/webapp/login.html" id="logout">Log out</a>
+                <button id="delete-marks" style="display:none">Delete Selected</button>
 
+                <div class="message" style="display:none"></div>
+
+                <div>
+                    <a href="/permanentMarker/webapp/login.html" id="logout">Log out</a>
+                </div>
+            </div>
+
+            <div class="footer">
+
+            </div>
+        </div>
     </body>
 </html>

@@ -31,7 +31,11 @@
                         .text(itemNumber)
                     )
                     .append($("<td>")
-                        .text(items[index].documentUrl)
+                        .append($("<a>")
+                            .attr("href", items[index].documentUrl)
+                            .attr("target", "_blank")
+                            .text(items[index].documentUrl)
+                        )
                     )
                     .append($("<td>")
                         .text(items[index].text)
@@ -46,15 +50,27 @@
                 )
             itemNumber += 1;
         });
+        $("tbody tr:odd").addClass('alternate');
+        $("#marks").show();
+        $("#delete-marks").show();
     }
  }
 
  function displayEmptyTableBody() {
-    $("#marks").find("tbody")
-        .append($("<tr>")
-            .attr("class", "empty-table-body")
+    $("#marks").hide();
+    $("#delete-marks").hide();
+    $(".message").addClass("info");
+    $(".message")
+        .append($("<p>")
             .text("You haven't highlighted any items yet.")
-        );
+        )
+        .append($("<p>")
+            .text("In order to do so press the Highlight Text button from the Permanent Marker extension")
+        )
+        .append($("<p>")
+            .text("and then select the text which you want to highlight.")
+        )
+    $(".message").show();
  }
 
  $(document).ready(function() {
