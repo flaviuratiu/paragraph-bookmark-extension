@@ -20,7 +20,7 @@
 .header p {
     font-size: 14px;
     float: left;
-    padding: 0px 2px 2px 2px;
+    padding: 0px;
     text-align: center;
 }
 
@@ -53,7 +53,7 @@ button {
 
 .message {
     display: block;
-    float: left;
+    text-align: center;
     padding: 5px;
     border-radius: 5px;
     margin: 10px;
