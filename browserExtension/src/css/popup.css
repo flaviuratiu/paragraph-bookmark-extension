@@ -27,7 +27,6 @@
 }
 
 .header > h1 {
-    display: inline;
     text-align: center;
 }
 
@@ -38,6 +37,12 @@
 .content * {
     display: inline;
     text-align: center;
+}
+
+#manage-account {
+    display: block;
+    float: left;
+    margin-left: 10px;
 }
 
 button {
@@ -51,17 +56,23 @@ button {
     outline: 0 !important;
 }
 
+.message {
+    display: block;
+    float: left;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
 .info {
     border: 1px solid #ddd;
 }
 
-.error-message {
-    border-radius: 5px;
+.error {
     border: 1px solid red;
 }
 
-.success-message {
-    border-radius: 5px;
+.success {
     border: 1px solid green;
 }
 
@@ -71,7 +82,3 @@ button {
     width: 250px;
 }
 
-.item {
-    padding: 5px;
-    margin: 15px;
-}

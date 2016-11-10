@@ -3,8 +3,6 @@
  */
 
  function broadcastHighlightMessage() {
-    var errorMessage = $(".error-message");
-    var successMessage = $(".success-message");
     forge.message.toFocussed(
         "highlight_triggered",
         "Capture next selection.",
@@ -13,13 +11,24 @@
         },
         function(){
             console.debug("Failed to trigger highlighting.");
-            errorMessage.text("Failed to trigger highlighting. Please try again later.");
-            errorMessage.show();
+            showMessage("error", "Failed to trigger highlighting. Please try again later.");
     });
-    if ($(errorMessage).is(":hidden")) {
-        successMessage.text("You can now select the text for highlighting.");
+    if ($(".message").is(":hidden")) {
+        showMessage("success", "You can now select the text for highlighting.");
         successMessage.show();
     }
+  }
+
+  function showMessage(className, text) {
+      var errorMessage = $(".message");
+      $(errorMessage).attr("class", "message");
+      $(errorMessage).addClass(className);
+      $(errorMessage).empty();
+      $(errorMessage)
+          .append($("<p>")
+              .text(text)
+          );
+      errorMessage.show();
   }
 
  $(document).ready(function() {
@@ -35,8 +44,7 @@
              if (cookie && cookie.user) {
                 broadcastHighlightMessage();
              } else {
-                $(".error-message").text("Please log in before highlighting text.");
-                $(".error-message").show();
+                showMessage("error", "Please log in before highlighting text.");
              }
          }
      );
